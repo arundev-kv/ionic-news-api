@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Top headlines</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content >
+
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+              <ion-item>
+                <ion-label stacked>Country</ion-label>
+                <ion-select [(ngModel)]="this.selectedCountry"  (ionChange)="getNewsSelect()">
+                  <ion-option *ngFor="let country of countries"  [value]="country.countryCode"  >{{country.country}}</ion-option>
+                  
+                </ion-select>
+              </ion-item>
+          </ion-col>
+          <ion-col col-6>
+              <ion-item>
+                <ion-label stacked>Category</ion-label>
+                <ion-select [(ngModel)]="this.selectedCategory" (ionChange)="getNewsSelect()">
+                  <ion-option *ngFor="let category of categories" [value]="category">{{category}}</ion-option>
+                  
+                </ion-select>
+              </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  
+    <ion-card *ngFor = 'let displayTopNews of topNews'>
+        <ion-card-content>
+        <ion-card-title>
+          {{displayTopNews.title}}
+        </ion-card-title>
+        <a href='{{displayTopNews.url}}'>
+          <img *ngIf="displayTopNews.urlToImage" src="{{displayTopNews.urlToImage}}" onerror="this.src='../../assets/imgs/no-image.jpg'"/>
+          <img *ngIf="!displayTopNews.urlToImage" src="../../assets/imgs/no-image.jpg"/>
+  
+          <p>
+            {{displayTopNews.description}}
+          </p>
+        
+      </a>
+      <ion-row>
+        <ion-col col-6>{{displayTopNews.publishedAt}}</ion-col>
+        <ion-col col-6 class="author">{{displayTopNews.author}}</ion-col>
+      </ion-row>
+      <ion-row>
+       <ion-col col-12>
+        <button ion-button color="danger" outline (click)="addFavorite(displayTopNews)">
+            <ion-icon name="heart-outline" ></ion-icon>
+            <div> &nbsp; Add to Favourites</div>
+        </button>
+       </ion-col>
+        
+      </ion-row>
+    </ion-card-content>
+      
+      </ion-card>
+      <ion-infinite-scroll>
+          <ion-infinite-scroll-content
+              loadingSpinner="bubbles"
+              loadingText="Loading more news...">
+          </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      
+  
+</ion-content>

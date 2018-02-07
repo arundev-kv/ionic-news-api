@@ -1,0 +1,65 @@
+
+import { Country } from "./country";
+
+export const COUNTRY_CODES: Country[] = [
+    {country:'UAE', countryCode:'ae'},
+    {country:'Argentina', countryCode:'ar'},
+    {country:'Austria', countryCode:'at'},
+    {country:'Australia', countryCode:'au'},
+    {country:'Belgium', countryCode:'be'},
+    {country:'Bulgaria', countryCode:'bg'},
+    {country:'Brazil', countryCode:'br'},
+    {country:'Canada', countryCode:'ca'},
+    {country:'Switzerland', countryCode:'ch'},
+    {country:'China', countryCode:'ch'},
+    {country:'Colombia', countryCode:'co'},
+    {country:'Cuba', countryCode:'cu'},
+    {country:'Czechia', countryCode:'cz'},
+    {country:'Germany', countryCode:'de'},
+    {country:'Egypt', countryCode:'eg'},
+    {country:'France', countryCode:'fr'},
+    {country:'Great Britain', countryCode:'gb'},
+    {country:'Greece', countryCode:'gr'},
+    {country:'Hong Kong', countryCode:'hk'},
+    {country:'Hungary', countryCode:'hu'},
+    {country:'Indonesia', countryCode:'id'},
+    {country:'Ireland', countryCode:'ie'},
+    {country:'Israel', countryCode:'il'},
+    {country:'India', countryCode:'in'},
+    {country:'Italy', countryCode:'it'},
+    {country:'Japan', countryCode:'jp'},
+    {country:'Korea', countryCode:'kr'},
+    {country:'Lithuania', countryCode:'lt'},
+    {country:'Latvia', countryCode:'lv'},
+    {country:'Morocco', countryCode:'ma'},
+    {country:'Mexico', countryCode:'mx'},
+    {country:'Malaysia', countryCode:'my'},
+    {country:'Nigeria', countryCode:'ng'},
+    {country:'Netherlands', countryCode:'nl'},
+    {country:'Norway', countryCode:'no'},
+    {country:'New Zealand', countryCode:'nz'},
+    {country:'Philippines', countryCode:'ph'},
+    {country:'Poland', countryCode:'pl'},
+    {country:'Portugal', countryCode:'pt'},
+    {country:'Romania', countryCode:'ro'},
+    {country:'Serbia', countryCode:'rs'},
+    {country:'Russia', countryCode:'ru'},
+    {country:'Saudi Arabia', countryCode:'sa'},
+    {country:'Sweden', countryCode:'se'},
+    {country:'Singapore', countryCode:'sg'},
+    {country:'Slovenia', countryCode:'si'},
+    {country:'Slovakia', countryCode:'sk'},
+    {country:'Thailand', countryCode:'th'},
+    {country:'Turkey', countryCode:'tr'},
+    {country:'Taiwan', countryCode:'tw'},
+    {country:'Ukraine', countryCode:'ua'},
+    {country:'USA', countryCode:'us'},
+    {country:'Venezuela', countryCode:'ve'},
+    {country:'South Africa', countryCode:'za'}
+
+  ];
+
+
+  export const CATEGORIES: string[] = [
+    'business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology'
+  ];
