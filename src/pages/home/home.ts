@@ -28,43 +28,52 @@ export class HomePage {
               public newsApiService: NewsApiService,
               public storage: Storage
               ) {
+                console.log("con");
     this.selectedCategory = 'general';
     this.selectedCountry = 'us';
             
     
     
-    this.newsApiService.getTopNews(this.selectedCountry,this.selectedCategory).
-      subscribe((response)=>{
+    this.newsApiService.getTopNews(this.selectedCountry,this.selectedCategory)
+    .subscribe((response)=>{
       
       this.topNews = response.articles; 
       console.log(response);
 
-
+      this.ionViewWillEnter();
      
     });
 
     this.countries = COUNTRY_CODES;
     this.categories = CATEGORIES;
-    //console.log(this.countries);
 
     
     
   }
 
-  ionViewDidLoad(){
-    
-    console.log("Home will enter");
+  ionViewWillEnter(){
+    console.log("viewq");
     this.favoriteNews = JSON.parse(localStorage.getItem('favoriteNews'));
-    for(let news of this.topNews){
-      for(let favNews of this.favoriteNews){
-        if(news.url == favNews.url){
-          news.favorite = true;
+    if(this.topNews.length>0){
+      for(let news of this.topNews){
+        let flag: number = 0;
+        for(let favNews of this.favoriteNews){
+          if(news.url == favNews.url){
+            flag = 1;
+          }
+        }
+        if(flag==1){
+          news.favorite=true;
         }
         else{
-          news.favorite = false;
+          news.favorite=false;
         }
       }
     }
+    else{
+      console.log("sorry");
+    }
+      
   }
   getNewsSelect(){
     this.newsApiService.getTopNews(this.selectedCountry,this.selectedCategory).
@@ -90,7 +99,7 @@ export class HomePage {
 
 
   isFavorite(selectedNews: TopNews){
-    console.log("heart "+selectedNews.favorite+" "+selectedNews.url);
+    //console.log("heart "+selectedNews.favorite+" "+selectedNews.url);
     if(selectedNews.favorite){
       return 'heart'
     }
