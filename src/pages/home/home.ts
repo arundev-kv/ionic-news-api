@@ -40,7 +40,11 @@ export class HomePage {
       this.topNews = response.articles; 
       console.log(response);
 
-      this.ionViewWillEnter();
+  
+        this.ionViewWillEnter();
+
+  
+      
      
     });
 
@@ -52,28 +56,28 @@ export class HomePage {
   }
 
   ionViewWillEnter(){
-    console.log("viewq");
-    this.favoriteNews = JSON.parse(localStorage.getItem('favoriteNews'));
-    if(this.topNews.length>0){
-      for(let news of this.topNews){
-        let flag: number = 0;
-        for(let favNews of this.favoriteNews){
-          if(news.url == favNews.url){
-            flag = 1;
+    // console.log("viewq");
+    this.newsApiService.getFavorite()
+      .subscribe((res)=>{
+        this.favoriteNews=res;
+        this.topNews.forEach(element1 => {
+          let flag: number = 0;
+          this.favoriteNews.forEach(element2 => {
+            if(element1.url == element2.url){
+              flag = 1;
+            }
+             
+           });
+           if(flag==1){
+            element1.favorite = true;
           }
-        }
-        if(flag==1){
-          news.favorite=true;
-        }
-        else{
-          news.favorite=false;
-        }
-      }
-    }
-    else{
-      console.log("sorry");
-    }
-      
+          else{
+            element1.favorite = false;
+          }
+           
+         });
+      });
+    console.log(this.favoriteNews.length);   
   }
   getNewsSelect(){
     this.newsApiService.getTopNews(this.selectedCountry,this.selectedCategory).

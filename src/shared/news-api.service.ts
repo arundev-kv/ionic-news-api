@@ -5,6 +5,7 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs';
 import { TopNews } from "./news";
 import { ToastController } from "ionic-angular";
+import { of } from "rxjs/observable/of";
 
 @Injectable()
 export class NewsApiService {
@@ -74,6 +75,10 @@ export class NewsApiService {
         this.favoriteList.splice( this.favoriteList.findIndex(x => x.url==clickedFav.url), 1);
         window.localStorage.setItem('favoriteNews', JSON.stringify(this.favoriteList));
         this.showToast("bottom","Removed from Favorites");
+      }
+      getFavorite(): Observable <TopNews[]>{
+          this.favoriteList = JSON.parse(localStorage.getItem('favoriteNews'));
+          return of(this.favoriteList);
       }
 
     
