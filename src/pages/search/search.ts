@@ -19,9 +19,11 @@ export class SearchPage {
 
   searchNews: TopNews[];
   searchWord: string;
+  pageNo: number;
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public newsApiService: NewsApiService) {
+                this.pageNo = 1;
 
         
   }
@@ -31,14 +33,25 @@ export class SearchPage {
     console.log('ionViewDidLoad SearchPage');
   }
 
-  filterItems(searchedWord: string){
-    console.log(searchedWord);
-      this.newsApiService.getSearchNews(searchedWord).
+  filterItems(){
+    console.log(this.searchWord);
+      this.newsApiService.getSearchNews(this.searchWord, this.pageNo).
         subscribe((response)=>{
         
           this.searchNews = response.articles; 
           console.log(this.searchNews);
         }); 
+  }
+  doInfinite(infiniteScroll){
+    this.pageNo=this.pageNo+1;
+    this.newsApiService.getSearchNews(this.searchWord, this.pageNo).
+    subscribe((response)=>{
+    
+      this.searchNews = this.searchNews.concat(response.articles); 
+      console.log(this.searchNews);
+      infiniteScroll.complete();
+    }); 
+
   }
 
 }

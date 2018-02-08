@@ -45,6 +45,13 @@
     </ion-card-content>
       
       </ion-card>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Loading more news...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    
 
 
 </ion-content>

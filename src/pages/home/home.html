@@ -52,7 +52,7 @@
       <ion-row>
        <ion-col col-12>
         <button ion-button color="danger" outline (click)="addFavorite(displayTopNews)">
-            <ion-icon name="heart-outline" ></ion-icon>
+            <ion-icon [name]="isFavorite(displayTopNews)" ></ion-icon>
             <div> &nbsp; Add to Favourites</div>
         </button>
        </ion-col>
@@ -61,12 +61,6 @@
     </ion-card-content>
       
       </ion-card>
-      <ion-infinite-scroll>
-          <ion-infinite-scroll-content
-              loadingSpinner="bubbles"
-              loadingText="Loading more news...">
-          </ion-infinite-scroll-content>
-      </ion-infinite-scroll>
       
   
 </ion-content>

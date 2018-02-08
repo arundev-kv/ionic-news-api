@@ -1,3 +1,4 @@
+import { NewsApiService } from './../../shared/news-api.service';
 import { TopNews } from './../../shared/news';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -16,15 +17,23 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FavoritesPage {
 
-  favoriteNews: TopNews;
+  favoriteNews: TopNews[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.favoriteNews = navParams.data;
-    console.log("fav data "+this.favoriteNews.author);
+  constructor(public navCtrl: NavController, public navParams: NavParams, public newsApiService: NewsApiService) {
+    
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad FavoritesPage');
+    this.favoriteNews = JSON.parse(localStorage.getItem('favoriteNews'));
+  }
+
+  remove(clickedFav: TopNews){
+    
+    this.newsApiService.remove(clickedFav);
+   
+    this.ionViewWillEnter();
+   // clickedFav.favorite = false;
   }
 
 

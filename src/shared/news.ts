@@ -9,6 +9,8 @@ export class News{
 }
 
 export class TopNews{
+    favorite: boolean;
+    index: number;  
     author: string;
     description: string;
     publishedAt: string;
