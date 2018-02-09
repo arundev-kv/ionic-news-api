@@ -46,7 +46,7 @@ export class HomePage {
       this.topNews = response.articles; 
       this.newsApiService.getFavorite()
       .subscribe((res)=>{
-        this.favoriteNews=res;
+        this.favoriteNews = res;
         if(this.favoriteNews.length > 0){
           this.topNews.forEach(element1 => {
             let flag: number = 0;
@@ -56,7 +56,7 @@ export class HomePage {
               }
                
              });
-             if(flag==1){
+             if(flag == 1){
               element1.favorite = true;
             }
             else{
