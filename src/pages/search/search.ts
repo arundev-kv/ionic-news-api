@@ -30,16 +30,13 @@ export class SearchPage {
 
   
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SearchPage');
   }
 
   filterItems(){
-    console.log(this.searchWord);
       this.newsApiService.getSearchNews(this.searchWord, this.pageNo).
         subscribe((response)=>{
         
-          this.searchNews = response.articles; 
-          console.log(this.searchNews);
+          this.searchNews = response.articles;
         }); 
   }
   doInfinite(infiniteScroll){
@@ -48,7 +45,6 @@ export class SearchPage {
     subscribe((response)=>{
     
       this.searchNews = this.searchNews.concat(response.articles); 
-      console.log(this.searchNews);
       infiniteScroll.complete();
     }); 
 

@@ -28,25 +28,8 @@ export class HomePage {
               public newsApiService: NewsApiService,
               public storage: Storage
               ) {
-                console.log("con");
     this.selectedCategory = 'general';
     this.selectedCountry = 'us';
-            
-    
-    
-    this.newsApiService.getTopNews(this.selectedCountry,this.selectedCategory)
-    .subscribe((response)=>{
-      
-      this.topNews = response.articles; 
-      console.log(response);
-
-  
-        this.ionViewWillEnter();
-
-  
-      
-     
-    });
 
     this.countries = COUNTRY_CODES;
     this.categories = CATEGORIES;
@@ -56,35 +39,43 @@ export class HomePage {
   }
 
   ionViewWillEnter(){
-    // console.log("viewq");
-    this.newsApiService.getFavorite()
+
+    this.newsApiService.getTopNews(this.selectedCountry,this.selectedCategory)
+    .subscribe((response)=>{
+      
+      this.topNews = response.articles; 
+      this.newsApiService.getFavorite()
       .subscribe((res)=>{
         this.favoriteNews=res;
-        this.topNews.forEach(element1 => {
-          let flag: number = 0;
-          this.favoriteNews.forEach(element2 => {
-            if(element1.url == element2.url){
-              flag = 1;
+        if(this.favoriteNews.length > 0){
+          this.topNews.forEach(element1 => {
+            let flag: number = 0;
+            this.favoriteNews.forEach(element2 => {
+              if(element1.url == element2.url){
+                flag = 1;
+              }
+               
+             });
+             if(flag==1){
+              element1.favorite = true;
+            }
+            else{
+              element1.favorite = false;
             }
              
            });
-           if(flag==1){
-            element1.favorite = true;
-          }
-          else{
-            element1.favorite = false;
-          }
-           
-         });
-      });
-    console.log(this.favoriteNews.length);   
+        }
+        
+      }); 
+     
+    });
   }
+
   getNewsSelect(){
     this.newsApiService.getTopNews(this.selectedCountry,this.selectedCategory).
     subscribe((response)=>{
     
     this.topNews = response.articles; 
-    console.log(" select news  "+this.topNews);
   });
   }
  
@@ -103,27 +94,13 @@ export class HomePage {
 
 
   isFavorite(selectedNews: TopNews){
-    //console.log("heart "+selectedNews.favorite+" "+selectedNews.url);
     if(selectedNews.favorite){
       return 'heart'
     }
     else{
       return 'heart-outline'
     }
-    
-    // const favourite = JSON.parse(localStorage.getItem('favList'));
-    // if(favourite==null){
-    //   return 'heart-outline'
-    // }
-    // const index = favourite.findIndex(res=>{
-    //   return res.id == id;
-    // })
- 
-    // if(index>=0){
-    //   return 'heart'
-    // }else{
-    //   return 'heart-outline'
-    // }
+   
   
   }
 

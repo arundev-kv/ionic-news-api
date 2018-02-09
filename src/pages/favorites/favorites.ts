@@ -24,7 +24,6 @@ export class FavoritesPage {
   }
 
   ionViewWillEnter() {
-    console.log('ionViewDidLoad FavoritesPage');
     this.favoriteNews = JSON.parse(localStorage.getItem('favoriteNews'));
   }
 
@@ -33,7 +32,6 @@ export class FavoritesPage {
     this.newsApiService.remove(clickedFav);
    
     this.ionViewWillEnter();
-   // clickedFav.favorite = false;
   }
 
 
